@@ -4,9 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Task 1: Explainable Statute Prediction — FIRE 2026</title>
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#f5f0e8">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
+
+  <script>
+    // FOUC prevention: apply persisted dark theme before first paint.
+    // Default theme is LIGHT; this only acts if the user has previously
+    // toggled to dark. Runs synchronously in <head> so there's no flash.
+    (function () {
+      try {
+        var stored = localStorage.getItem('fire2026_theme')
+        if (stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark')
+          document.querySelectorAll('.theme-toggle').forEach(function (b) {
+            b.textContent = 'Light'
+          })
+        } else {
+          document.documentElement.removeAttribute('data-theme')
+        }
+      } catch (e) { /* localStorage blocked — default to light */ }
+    })();
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +39,7 @@
   <link rel="stylesheet" href="../css/syntax.css">
   <link rel="stylesheet" href="../css/animations.css">
   <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/cookie-disclosure.css">
 </head>
 <body>
 
@@ -199,7 +219,7 @@
         </div>
 
         <p class="prose mb-16">
-          <strong>Release date:</strong> 15 June 2026
+          <strong>Release date:</strong> <span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span>
         </p>
 
         <p class="prose mb-24">
@@ -370,7 +390,7 @@
         </p>
 
         <p class="prose-sm text-muted mb-16" style="font-size: 0.75rem;">
-          * Final details — including metric weights, prompt templates, and evaluation pipeline — will be confirmed after <strong>15 June 2026</strong>. Minor updates to prompt specifications may occur.
+          * Final details — including metric weights, prompt templates, and evaluation pipeline — will be confirmed after <strong><span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span></strong>. Minor updates to prompt specifications may occur.
         </p>
 
         <div class="table-wrapper mt-24">
@@ -428,6 +448,12 @@
 
       <hr class="divider">
 
+      <!-- SCHEDULE UPDATE NOTICE -->
+      <div class="notice notice--warning" data-reveal="fade-up">
+        <span class="notice__label">Schedule update:</span>
+        All dates in the timeline below (§08) have been postponed by 5 days. The original (struck-through) date is shown next to the new date. Please plan accordingly.
+      </div>
+
       <!-- § 08 Timeline -->
       <section id="timeline" class="task-section" data-reveal="fade-up">
         <div class="task-section__eyebrow">§ 08 · TIMELINE</div>
@@ -443,23 +469,23 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>15 June 2026</strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span></strong></td>
                 <td>Training data release (500 cases)</td>
               </tr>
               <tr>
-                <td><strong>20 July 2026</strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">20 July 2026</span> <span class="date-arrow">→</span> <span class="date-new">25 July 2026</span></span></strong></td>
                 <td>Test data release (100 cases)</td>
               </tr>
               <tr>
-                <td><strong>End July 2026</strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">End July 2026</span> <span class="date-arrow">→</span> <span class="date-new">5 August 2026</span></span></strong></td>
                 <td>Evaluation results declared</td>
               </tr>
               <tr>
-                <td><strong>15 August 2026</strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">15 August 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 August 2026</span></span></strong></td>
                 <td>Working notes due</td>
               </tr>
               <tr>
-                <td><strong>End September 2026</strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">End September 2026</span> <span class="date-arrow">→</span> <span class="date-new">5 October 2026</span></span></strong></td>
                 <td>Camera-ready copies</td>
               </tr>
             </tbody>
@@ -524,5 +550,6 @@
   <script src="../js/scrollspy.js"></script>
   <script src="../js/copy.js"></script>
   <script src="../js/pretext-dynamic.js" type="module"></script>
+  <script src="../js/cookie-disclosure.js" defer></script>
 </body>
 </html>

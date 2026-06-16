@@ -312,7 +312,7 @@
     font-size: var(--type-lg);
     letter-spacing: 0.03em;
     margin-bottom: 12px;
-    color: #ffffff;
+    color: var(--color-heading);
   }
 
   .card__desc {
@@ -460,5 +460,57 @@
 
   .footer__links a:hover {
     color: var(--color-cyan);
+  }
+
+  /* ── Notice banner (for schedule updates / postponements) ─── */
+  .notice {
+    margin: 24px 0;
+    padding: 14px 18px;
+    border-left: 3px solid var(--color-amber);
+    background: var(--color-surface-1);
+    border-radius: 2px;
+    font-family: var(--font-body);
+    font-size: var(--type-base);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .notice--warning {
+    border-left-color: var(--color-amber);
+  }
+
+  .notice__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--type-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-amber);
+    margin-right: 8px;
+  }
+
+  /* ── Date-changed (strikethrough old + new + arrow) ────────── */
+  .date-changed {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45em;
+    flex-wrap: wrap;
+  }
+
+  .date-changed .date-old {
+    text-decoration: line-through;
+    color: var(--color-pink);
+    opacity: 0.75;
+    font-weight: 500;
+  }
+
+  .date-changed .date-arrow {
+    color: var(--color-muted);
+    font-weight: 500;
+  }
+
+  .date-changed .date-new {
+    color: var(--color-cyan);
+    font-weight: 700;
   }
 }

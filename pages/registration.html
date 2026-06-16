@@ -4,9 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registration — FIRE 2026</title>
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#f5f0e8">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
+
+  <script>
+    // FOUC prevention: apply persisted dark theme before first paint.
+    // Default theme is LIGHT; this only acts if the user has previously
+    // toggled to dark. Runs synchronously in <head> so there's no flash.
+    (function () {
+      try {
+        var stored = localStorage.getItem('fire2026_theme')
+        if (stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark')
+          document.querySelectorAll('.theme-toggle').forEach(function (b) {
+            b.textContent = 'Light'
+          })
+        } else {
+          document.documentElement.removeAttribute('data-theme')
+        }
+      } catch (e) { /* localStorage blocked — default to light */ }
+    })();
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +39,7 @@
   <link rel="stylesheet" href="../css/syntax.css">
   <link rel="stylesheet" href="../css/animations.css">
   <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/cookie-disclosure.css">
 </head>
 <body>
 
@@ -67,10 +87,10 @@
         Participate in the FIRE 2026 shared track <em>LLM as a Judge?: From Statute Prediction to Sycophancy Detection in Law</em>. Register on CodaBench to access the competition platform, download training data, and submit your predictions.
       </p>
       <p class="prose" style="text-align: center; margin-bottom: 24px;">
-        <strong>Registrations open 15 June 2026</strong>
+        <strong>Registrations open <span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span></strong>
       </p>
       <a href="#" class="btn btn-primary" style="padding: 12px 32px; font-size: 0.9rem;">Register on CodaBench</a>
-      <p class="text-muted" style="margin-top: 16px; font-size: 0.85rem;">CodaBench competition page will be available from 15 June 2026</p>
+      <p class="text-muted" style="margin-top: 16px; font-size: 0.85rem;">CodaBench competition page will be available from <span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span></p>
     </div>
   </section>
 
@@ -129,5 +149,6 @@
   <script src="../js/nav.js"></script>
   <script src="../js/scroll-reveal.js"></script>
   <script src="../js/pretext-dynamic.js" type="module"></script>
+  <script src="../js/cookie-disclosure.js" defer></script>
 </body>
 </html>

@@ -8,6 +8,25 @@
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
 
+  <script>
+    // FOUC prevention: apply persisted dark theme before first paint.
+    // Default theme is LIGHT; this only acts if the user has previously
+    // toggled to dark. Runs synchronously in <head> so there's no flash.
+    (function () {
+      try {
+        var stored = localStorage.getItem('fire2026_theme')
+        if (stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark')
+          document.querySelectorAll('.theme-toggle').forEach(function (b) {
+            b.textContent = 'Light'
+          })
+        } else {
+          document.documentElement.removeAttribute('data-theme')
+        }
+      } catch (e) { /* localStorage blocked — default to light */ }
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
@@ -20,6 +39,7 @@
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="css/loader.css">
   <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/cookie-disclosure.css">
 </head>
 <body>
 
@@ -121,6 +141,16 @@
         <a href="#problem" class="hero__scroll" data-no-transition>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 10l5 5 5-5"/></svg>
         </a>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════════ -->
+      <!-- SCHEDULE UPDATE NOTICE                              -->
+      <!-- ═══════════════════════════════════════════════════ -->
+      <section class="container" style="padding-top: 0;" data-reveal="fade-up">
+        <div class="notice notice--warning">
+          <span class="notice__label">Schedule update:</span>
+          All dates in the timeline below have been postponed by 5 days. The original (struck-through) date is shown next to the new date. Please plan accordingly.
+        </div>
       </section>
 
       <!-- ═══════════════════════════════════════════════════ -->
@@ -254,7 +284,7 @@
 
             <div class="tl-item past odd" data-reveal="fade-up">
               <div class="tl-cnt">
-                <span class="date-badge">15 May 2026</span>
+                <span class="date-badge"><span class="date-changed"><span class="date-old">15 May 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 May 2026</span></span></span>
                 <div class="tl-event">Track website opens, training data released</div>
               </div>
               <div class="tl-cl"></div>
@@ -269,14 +299,14 @@
               <div class="tl-dot"></div>
               <div class="tl-cr"></div>
               <div class="tl-cnt">
-                <span class="date-badge">15 June 2026</span>
+                <span class="date-badge"><span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span></span>
                 <div class="tl-event">Training data release (500 cases)</div>
               </div>
             </div>
 
             <div class="tl-item active odd" data-reveal="fade-up">
               <div class="tl-cnt">
-                <span class="date-badge date-badge--active">20 July 2026</span>
+                <span class="date-badge date-badge--active"><span class="date-changed"><span class="date-old">20 July 2026</span> <span class="date-arrow">→</span> <span class="date-new">25 July 2026</span></span></span>
                 <div class="tl-event">Test data release (100 cases)</div>
               </div>
               <div class="tl-cl"></div>
@@ -291,14 +321,14 @@
               <div class="tl-dot"></div>
               <div class="tl-cr"></div>
               <div class="tl-cnt">
-                <span class="date-badge">30 June 2026</span>
+                <span class="date-badge"><span class="date-changed"><span class="date-old">30 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">5 July 2026</span></span></span>
                 <div class="tl-event">Run submission deadline</div>
               </div>
             </div>
 
             <div class="tl-item future odd" data-reveal="fade-up">
               <div class="tl-cnt">
-                <span class="date-badge">15 July 2026</span>
+                <span class="date-badge"><span class="date-changed"><span class="date-old">15 July 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 July 2026</span></span></span>
                 <div class="tl-event">Track results declared</div>
               </div>
               <div class="tl-cl"></div>
@@ -313,14 +343,14 @@
               <div class="tl-dot"></div>
               <div class="tl-cr"></div>
               <div class="tl-cnt">
-                <span class="date-badge">30 Aug 2026</span>
+                <span class="date-badge"><span class="date-changed"><span class="date-old">30 Aug 2026</span> <span class="date-arrow">→</span> <span class="date-new">4 September 2026</span></span></span>
                 <div class="tl-event">Working notes due</div>
               </div>
             </div>
 
             <div class="tl-item future odd" data-reveal="fade-up">
               <div class="tl-cnt">
-                <span class="date-badge">30 Sep 2026</span>
+                <span class="date-badge"><span class="date-changed"><span class="date-old">30 Sep 2026</span> <span class="date-arrow">→</span> <span class="date-new">5 October 2026</span></span></span>
                 <div class="tl-event">Camera-ready copies</div>
               </div>
               <div class="tl-cl"></div>
@@ -335,7 +365,7 @@
               <div class="tl-dot"></div>
               <div class="tl-cr"></div>
               <div class="tl-cnt">
-                <span class="date-badge">Dec 2026</span>
+                <span class="date-badge"><span class="date-changed"><span class="date-old">Dec 2026</span> <span class="date-arrow">→</span> <span class="date-new">5 December 2026</span></span></span>
                 <div class="tl-event">FIRE 2026 Conference</div>
               </div>
             </div>
@@ -398,7 +428,7 @@
           <div data-reveal="fade-up" data-reveal-delay="200">
             <a href="pages/registration.html" class="btn btn-primary" style="font-size: 0.85rem; padding: 16px 48px;">Register on CodaBench</a>
           </div>
-          <p class="register__coming-soon mt-16" data-reveal="fade-up">Registrations open 15 June 2026</p>
+          <p class="register__coming-soon mt-16" data-reveal="fade-up">Registrations open <span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span></p>
         </div>
       </section>
 
@@ -424,6 +454,7 @@
   <script src="js/counter.js"></script>
   <script src="js/timeline.js"></script>
   <script src="js/pretext-dynamic.js" type="module"></script>
+  <script src="js/cookie-disclosure.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(() => {

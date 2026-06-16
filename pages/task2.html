@@ -8,6 +8,25 @@
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon.png">
 
+  <script>
+    // FOUC prevention: apply persisted dark theme before first paint.
+    // Default theme is LIGHT; this only acts if the user has previously
+    // toggled to dark. Runs synchronously in <head> so there's no flash.
+    (function () {
+      try {
+        var stored = localStorage.getItem('fire2026_theme')
+        if (stored === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark')
+          document.querySelectorAll('.theme-toggle').forEach(function (b) {
+            b.textContent = 'Light'
+          })
+        } else {
+          document.documentElement.removeAttribute('data-theme')
+        }
+      } catch (e) { /* localStorage blocked — default to light */ }
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
@@ -20,6 +39,7 @@
   <link rel="stylesheet" href="../css/syntax.css">
   <link rel="stylesheet" href="../css/animations.css">
   <link rel="stylesheet" href="../css/theme.css">
+  <link rel="stylesheet" href="../css/cookie-disclosure.css">
 
   <style>
     /* ── Interactive Sycophancy Demo ──────────────────── */
@@ -498,7 +518,7 @@
         </div>
 
         <p class="prose mb-16">
-          <strong>Release date:</strong> 15 June 2026
+          <strong>Release date:</strong> <span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span>
         </p>
 
         <p class="prose mb-16">
@@ -745,7 +765,7 @@
         </p>
 
         <p class="prose-sm text-muted mb-16" style="font-size: 0.75rem;">
-          * Final details — including metric specifications, prompt templates, and evaluation pipeline — will be confirmed after <strong>15 June 2026</strong>. Minor updates to prompt variants may occur.
+          * Final details — including metric specifications, prompt templates, and evaluation pipeline — will be confirmed after <strong><span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span></strong>. Minor updates to prompt variants may occur.
         </p>
 
         <p class="prose mt-16 mb-24">
@@ -794,6 +814,12 @@
 
       <hr class="divider">
 
+      <!-- SCHEDULE UPDATE NOTICE -->
+      <div class="notice notice--warning" data-reveal="fade-up">
+        <span class="notice__label">Schedule update:</span>
+        All dates in the timeline below (§09) have been postponed by 5 days. The original (struck-through) date is shown next to the new date. Please plan accordingly.
+      </div>
+
       <!-- § 09 Timeline -->
       <section id="timeline" class="task-section" data-reveal="fade-up">
         <div class="task-section__eyebrow">§ 09 · TIMELINE</div>
@@ -809,27 +835,27 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>15 June 2026</strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span></strong></td>
                 <td>Training data release (~7,380 instances)</td>
               </tr>
               <tr>
-                <td><strong>20 July 2026</strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">20 July 2026</span> <span class="date-arrow">→</span> <span class="date-new">25 July 2026</span></span></strong></td>
                 <td>Test data release (~1,500 instances)</td>
               </tr>
               <tr>
-                <td><strong>30 July 2026</strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">30 July 2026</span> <span class="date-arrow">→</span> <span class="date-new">4 August 2026</span></span></strong></td>
                 <td>Run submission deadline</td>
               </tr>
               <tr>
-                <td><strong>15 August 2026</strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">15 August 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 August 2026</span></span></strong></td>
                 <td>Working notes due</td>
               </tr>
               <tr>
-                <td><strong>End September 2026</strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">End September 2026</span> <span class="date-arrow">→</span> <span class="date-new">5 October 2026</span></span></strong></td>
                 <td>Camera-ready copies</td>
               </tr>
               <tr>
-                <td><strong>December 2026</strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">December 2026</span> <span class="date-arrow">→</span> <span class="date-new">5 December 2026</span></span></strong></td>
                 <td>FIRE 2026 Conference — results announced</td>
               </tr>
             </tbody>
@@ -896,5 +922,6 @@
   <script src="../js/scrollspy.js"></script>
   <script src="../js/copy.js"></script>
   <script src="../js/pretext-dynamic.js" type="module"></script>
+  <script src="../js/cookie-disclosure.js" defer></script>
 </body>
 </html>
