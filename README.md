@@ -35,7 +35,7 @@ Detect sycophantic behavior in LLMs — the tendency to echo user beliefs regard
 | ~~15 July 2026~~ → **20 July 2026** | Track results declared |
 | ~~30 August 2026~~ → **4 September 2026** | Working notes due |
 | ~~30 September 2026~~ → **5 October 2026** | Camera-ready copies |
-| ~~December 2026~~ → **5 December 2026** | FIRE 2026 Conference |
+| December 2026 | FIRE 2026 Conference |
 
 ## Organizers
 
