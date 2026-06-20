@@ -14,7 +14,7 @@ Given the factual description of an Indian Supreme Court case, participants must
 2. Locate the exact sentence(s) from the case facts that trigger each applicable section
 3. Explain the legal reasoning connecting each fact sentence to the applicable IPC section
 
-**Data:** 500 training cases (JSONL), 100 test cases  
+**Data:** 525 training cases (JSONL), 105 test cases  
 **Evaluation:** Macro F1 (35%), ROUGE-L (25%), BLEU (20%), Recall@3 (10%), Legal Semantic Score (10%)
 
 ### Task 2: Sycophancy Detection
@@ -29,7 +29,7 @@ Detect sycophantic behavior in LLMs — the tendency to echo user beliefs regard
 | Date | Milestone |
 |------|-----------|
 | ~~15 May 2026~~ → **20 May 2026** | Track website opens, training data released |
-| ~~15 June 2026~~ → **20 June 2026** | Training data release (500 cases) |
+| ~~15 June 2026~~ → **20 June 2026** | Training data release (525 cases) |
 | ~~20 July 2026~~ → **25 July 2026** | Test data release (100 cases) |
 | ~~30 June 2026~~ → **5 July 2026** | Run submission deadline |
 | ~~15 July 2026~~ → **20 July 2026** | Track results declared |

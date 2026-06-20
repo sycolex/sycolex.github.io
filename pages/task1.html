@@ -205,7 +205,7 @@
 
         <div class="grid grid--3 mt-24 mb-32">
           <div class="stat-card">
-            <div class="stat-card__number" style="font-size: var(--type-2xl);">500</div>
+            <div class="stat-card__number" style="font-size: var(--type-2xl);">525</div>
             <div class="stat-card__label">Cases</div>
           </div>
           <div class="stat-card">
@@ -213,8 +213,8 @@
             <div class="stat-card__label">Format</div>
           </div>
           <div class="stat-card">
-            <div class="stat-card__number" style="font-size: var(--type-2xl);">~693</div>
-            <div class="stat-card__label">Avg. Words</div>
+            <div class="stat-card__number" style="font-size: var(--type-2xl);">~2,583</div>
+            <div class="stat-card__label">Avg. Chars</div>
           </div>
         </div>
 
@@ -234,21 +234,13 @@
             </button>
           </div>
           <pre><code class="json" data-typewriter>{
-  "doc_id": "2004.INSC.496.txt",
-  "doc_url": "http://www.liiofindia.org/in/cases/cen/INSC/2004/496.html",
-  "fact": "Full case factual description...",
-  "statute": [
-    {
-      "section": "Section 302 IPC",
-      "exact_fact": "The accused was found in possession of the victim's blood-stained knife at the scene.",
-      "reasoning_trace": "Section 302 IPC applies because the facts establish intentional causing of death with a weapon. The presence of the accused with the weapon at the scene and the forensic evidence linking the knife to the victim satisfy the elements of murder under Section 300 IPC, making Section 302 the appropriate penal provision."
-    },
-    {
-      "section": "Section 201 IPC",
-      "exact_fact": "After the incident, the accused was seen washing blood-stained clothes at the community well.",
-      "reasoning_trace": "Section 201 IPC applies because the accused deliberately destroyed evidence by washing blood-stained clothing, constituting causing disappearance of evidence of an offence committed."
-    }
-  ]
+  "doc_id": "2013.INSC.228.txt",
+  "fact": " The facts which are essential to be stated for adjudication of this appeal are that an FIR was lodged by Prem Singh, PW-2...",
+  "explanation": {
+    "The facts which are essential to be stated for adjudication of this appeal are that an FIR was lodged by Prem Singh, PW-2, alleging that about 00 p.m.": "IPC 147",
+    "on 1992, on hearing a gunshot sound and simultaneously the cry of his brother, Gopal Singh, PW-1, that he was being assaulted and his life was in danger, he rushed to the shop of Gopal Singh and found that accused Gopal Singh and his brother Puran Singh were beating him with hands, fists and stones.": "IPC 147"
+  },
+  "statute": ["IPC 147"]
 }</code></pre>
         </div>
 
@@ -265,29 +257,29 @@
               <tr>
                 <td><code>doc_id</code></td>
                 <td>string</td>
-                <td>Unique case identifier (e.g., "2004.INSC.496.txt")</td>
-              </tr>
-              <tr>
-                <td><code>doc_url</code></td>
-                <td>string</td>
-                <td>Source URL of the judgment</td>
+                <td>Unique case identifier (e.g., "2013.INSC.228.txt")</td>
               </tr>
               <tr>
                 <td><code>fact</code></td>
                 <td>string</td>
-                <td>Full factual description of the case (~693 words average)</td>
+                <td>Full factual description of the case (~2,583 chars average)</td>
+              </tr>
+              <tr>
+                <td><code>explanation</code></td>
+                <td>dict</td>
+                <td>Sentence-to-statute mapping: each key is a sentence from the fact; each value is the IPC section code it supports</td>
               </tr>
               <tr>
                 <td><code>statute</code></td>
-                <td>list[dict]</td>
-                <td>List of applicable IPC sections with exact_fact and reasoning_trace</td>
+                <td>list[string]</td>
+                <td>IPC section codes applicable to the case (e.g., ["IPC 302", "IPC 201"])</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <p class="prose-sm mt-16 text-muted">
-          A single case may have multiple statute entries (one per applicable IPC section). Each statute entry maps to a specific sentence in the facts and includes a reasoning trace.
+          A single case may have multiple IPC sections in its <code>statute</code> list. The <code>explanation</code> field maps each sentence in the fact to the specific IPC section it supports. Multiple sentences may map to the same statute.
         </p>
       </section>
 
@@ -300,7 +292,7 @@
 
         <div class="grid grid--2 mt-24 mb-24">
           <div class="stat-card">
-            <div class="stat-card__number" style="font-size: var(--type-2xl);">100</div>
+            <div class="stat-card__number" style="font-size: var(--type-2xl);">105</div>
             <div class="stat-card__label">Cases</div>
           </div>
           <div class="stat-card">
@@ -310,7 +302,7 @@
         </div>
 
         <p class="prose mb-16">
-          <strong>Format:</strong> JSONL — only <code>doc_id</code>, <code>doc_url</code>, and <code>fact</code> are provided. No statute labels, no exact_fact sentences, no reasoning traces.
+          <strong>Format:</strong> JSONL — only <code>doc_id</code> and <code>fact</code> are provided. No statute labels, no explanation sentences.
         </p>
 
         <div class="json-block" data-reveal="fade-up">
@@ -321,14 +313,13 @@
             </button>
           </div>
           <pre><code class="json" data-typewriter>{
-  "doc_id": "2016.INSC.210.txt",
-  "doc_url": "http://www.liiofindia.org/in/cases/cen/INSC/2016/210.html",
-  "fact": "Full case factual description..."
+  "doc_id": "2002.INSC.274.txt",
+  "fact": "By the impugned judgment the High Court while convicting the respondent of the offence under Section 376 of the Indian Penal Code reduced his sentence..."
 }</code></pre>
         </div>
 
         <p class="prose mt-24">
-          Participants must predict <strong>all three outputs</strong>: section labels, exact_fact sentences, and reasoning traces.
+          Participants must predict <strong>all three outputs</strong>: statute section labels, explanation sentences, and reasoning traces.
         </p>
       </section>
 
@@ -340,7 +331,7 @@
         <h2>Submission Format</h2>
 
         <p class="prose mb-24">
-          Participants submit a single JSONL file. The submission format must be identical to the training data format:
+          Participants submit a single JSONL file. The submission format must contain <code>doc_id</code> and <code>statute</code> (list of predictions):
         </p>
 
         <div class="json-block" data-reveal="fade-up">
@@ -351,17 +342,17 @@
             </button>
           </div>
           <pre><code class="json" data-typewriter>{
-  "doc_id": "2016.INSC.210.txt",
+  "doc_id": "2002.INSC.274.txt",
   "statute": [
     {
-      "section": "Section 302 IPC",
-      "exact_fact": "The accused were five in number and they caused injuries to Ashok Kumar with sword and knife.",
-      "reasoning_trace": "Section 302 IPC applies because the facts establish that the accused caused death of the deceased by inflicting injuries with deadly weapons (sword and knife), satisfying the ingredients of murder under Section 300 IPC."
+      "section": "IPC 376",
+      "exact_fact": "She recognized the respondent Kishanlal and asked him as to why he had come. He said that he had come to have sexual intercourse with her.",
+      "reasoning_trace": "Section 376 IPC applies because the facts establish that the respondent committed sexual intercourse with the prosecutrix against her will, satisfying the ingredients of rape under Section 375 IPC."
     },
     {
-      "section": "Section 149 IPC",
-      "exact_fact": "Companions of Kallu came to the factory and murdered Ashok Kumar.",
-      "reasoning_trace": "Section 149 IPC applies because the accused were members of an unlawful assembly, and the murder was committed in prosecution of the common object of such assembly."
+      "section": "IPC 457",
+      "exact_fact": "While going to Ramlila her husband had bolted the house from outside. At about 11-12 O' clock at night she woke up as someone opened the door.",
+      "reasoning_trace": "Section 457 IPC applies because the respondent entered the house as a trespasser with intent to commit an offence, having opened the bolted door to gain entry at night."
     }
   ]
 }</code></pre>
@@ -374,6 +365,7 @@
             <li>No team size limit</li>
             <li>JSONL format only, one line per test case</li>
             <li>Each line must contain <code>doc_id</code> and <code>statute</code> (list of predictions)</li>
+            <li>Each <code>statute</code> entry must contain <code>section</code>, <code>exact_fact</code>, and <code>reasoning_trace</code></li>
           </ul>
         </div>
       </section>
@@ -470,7 +462,7 @@
             <tbody>
               <tr>
                 <td><strong><span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span></strong></td>
-                <td>Training data release (500 cases)</td>
+                <td>Training data release (525 cases)</td>
               </tr>
               <tr>
                 <td><strong><span class="date-changed"><span class="date-old">20 July 2026</span> <span class="date-arrow">→</span> <span class="date-new">25 July 2026</span></span></strong></td>
