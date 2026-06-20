@@ -1,2 +1,5 @@
 # Local training data — not committed (large binary + sensitive legal corpus)
 data/
+
+# Playwright MCP test artifacts (screenshots, logs, page snapshots)
+.playwright-mcp/
