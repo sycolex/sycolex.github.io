@@ -415,8 +415,21 @@ code {
   padding: 2px;
 }
 
+/* Dark mode: match the nav background instead of tan */
+[data-theme="dark"] .nav__logo img {
+  background: var(--color-surface-1);
+  border-radius: 4px;
+  padding: 2px;
+}
+
 .hero__logo {
   background: #c9bda4;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+[data-theme="dark"] .hero__logo {
+  background: var(--color-surface-1);
   border-radius: 8px;
   padding: 8px;
 }

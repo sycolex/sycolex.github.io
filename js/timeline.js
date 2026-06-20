@@ -36,11 +36,23 @@
   // ── Dynamic today marker ────────────────────────────────
   function parseDate(str) {
     if (!str) return null
-    const full = str.trim()
-    const d = new Date(full)
+    // Handle date-changed markup: extract the NEW date from .date-new span
+    // or fall back to the raw text (which may contain both old+new dates)
+    let text = str.trim()
+
+    // If the text contains a → arrow, extract the NEW date (after the arrow)
+    if (text.includes('→')) {
+      const parts = text.split('→')
+      if (parts.length >= 2) text = parts[parts.length - 1].trim()
+    }
+
+    // Strip any HTML artifacts (e.g. from spans)
+    text = text.replace(/<[^>]+>/g, '').trim()
+
+    const d = new Date(text)
     if (!isNaN(d.getTime())) return d
     const months = { January:0, February:1, March:2, April:3, May:4, June:5, July:6, August:7, September:8, October:9, November:10, December:11 }
-    const parts = full.split(/\s+/)
+    const parts = text.split(/\s+/)
     if (parts.length >= 2) {
       const m = months[parts[0]]
       const y = parseInt(parts[parts.length - 1])
