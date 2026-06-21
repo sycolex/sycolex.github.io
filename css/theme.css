@@ -26,34 +26,33 @@ body::before {
   z-index: 0;
 }
 
-/* ── JSON & code blocks stay dark in BOTH themes ───────── */
+/* ── JSON & code blocks — light theme uses a paper-tan look ─ */
 /*
- * The interior stays dark in both modes because the syntax
- * highlighter is calibrated for a dark background. The border,
- * however, follows the theme so the block integrates with the
- * page (tan in light, dark in dark).
+ * In LIGHT mode the block uses a light tan background with dark
+ * text colors (calibrated for readability on a paper-style page).
+ * In DARK mode it uses the neon-on-black syntax palette.
  */
 .json-block {
-  background: #1a1610;
+  background: #ebe4d0;   /* light tan, matches --color-surface-1 */
   border-color: var(--color-border);
   border-left-color: var(--color-cyan);
 }
 
 .json-block__header {
-  background: #1e1a12;
+  background: #e5dcc6;   /* slightly darker tan, matches --color-surface-2 */
   border-bottom-color: var(--color-border);
 }
 
 .json-block pre {
-  background: #1a1610;
-  color: #d4c8b0;
+  background: #ebe4d0;
+  color: #2c2416;       /* dark brown for text on tan, matches --color-text */
 }
 
-/* In dark mode, JSON uses an even-darker base (the original colors
-   from the dark theme — better for the bright-on-dark syntax palette). */
+/* Dark mode: neon palette on near-black */
 [data-theme="dark"] .json-block {
   background: #04040a;
   border-color: var(--color-border);
+  border-left-color: var(--color-cyan);
 }
 
 [data-theme="dark"] .json-block__header {
@@ -63,8 +62,18 @@ body::before {
 
 [data-theme="dark"] .json-block pre {
   background: #04040a;
-  color: var(--color-text);
+  color: #d4c8b0;
 }
+
+/* ── JSON syntax tokens — light mode uses dark, saturated colors ── */
+[data-theme="light"] .tok-key    { color: #0a7a9e; }   /* deep cyan */
+[data-theme="light"] .tok-str    { color: #1a8a5a; }   /* deep green */
+[data-theme="light"] .tok-num    { color: #b87a20; }   /* deep amber */
+[data-theme="light"] .tok-bool   { color: #6a42c4; }   /* deep violet */
+[data-theme="light"] .tok-null   { color: #6b5d4a; }   /* muted brown */
+[data-theme="light"] .tok-brace  { color: #c42050; }   /* deep pink */
+[data-theme="light"] .tok-bracket{ color: #8a4a20; }   /* deep orange */
+[data-theme="light"] .tok-colon  { color: #2c2416; }   /* dark brown */
 
 /* ── Stat-card numbers — keep cyan accent in both themes ── */
 .stat-card__number {
