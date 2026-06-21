@@ -63,6 +63,44 @@
       background: var(--color-surface-1);
     }
 
+    /* ── Form fallback (if embed doesn't load) ─────────── */
+    .form-fallback {
+      margin-top: 24px;
+      padding: 20px 24px;
+      text-align: center;
+      border-top: 1px dashed var(--color-border);
+    }
+
+    .form-fallback__msg {
+      font-family: var(--font-body);
+      font-size: var(--type-sm);
+      color: var(--color-muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .form-fallback__msg strong {
+      color: var(--color-amber);
+      font-family: var(--font-display);
+      letter-spacing: 0.03em;
+    }
+
+    .form-fallback__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      padding: 12px 28px;
+    }
+
+    .form-fallback__note {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--color-ghost);
+      margin-top: 12px;
+      letter-spacing: 0.02em;
+    }
+
     /* ── Steps layout ─────────────────────────────── */
     .steps-list {
       display: grid;
@@ -159,6 +197,25 @@
             title="FIRE 2026 Track Registration"
             loading="lazy"
           >Loading…</iframe>
+        </div>
+
+        <!-- Fallback button if the embed doesn't load -->
+        <div class="form-fallback" data-reveal="fade-up">
+          <p class="form-fallback__msg">
+            <strong>Form not loading?</strong> If the embedded form above doesn't display, click the button below to open it in a new tab.
+          </p>
+          <a
+            href="https://forms.gle/dEwiPQSVHGaaZPu18"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary form-fallback__btn"
+          >
+            Open Registration Form in New Tab
+            <span class="btn__arrow" aria-hidden="true">↗</span>
+          </a>
+          <p class="form-fallback__note">
+            The form opens in a new browser tab. After completing it, return to this page to continue.
+          </p>
         </div>
       </div>
     </section>
