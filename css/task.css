@@ -66,10 +66,12 @@
 
   .json-block pre code {
     display: block;
-    white-space: pre;
-    /* Keep long JSON lines inside the pre's overflow-x scroll
-       instead of overflowing the block's right border. */
-    max-width: 100%;
+    /* Use pre-wrap so long lines wrap within the block instead of
+       overflowing past the right border.  Indent wrapped lines
+       to show the original indentation. */
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
 
   /* ── Task section headers ────────────────────────────── */
