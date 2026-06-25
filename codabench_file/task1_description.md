@@ -155,11 +155,13 @@ At least one baseline system will be provided to participants. Potential baselin
 
 | Date | Milestone |
 |---|---|
+| ~~15 May 2026~~ → **20 May 2026** | Track website opens, training data released |
 | ~~15 June 2026~~ → **20 June 2026** | Training data release (525 cases) |
 | ~~20 July 2026~~ → **25 July 2026** | Test data release (105 cases) |
-| ~~End July 2026~~ → **5 August 2026** | Evaluation results declared |
-| ~~15 August 2026~~ → **20 August 2026** | Working notes due |
-| ~~End September 2026~~ → **5 October 2026** | Camera-ready copies |
+| ~~30 June 2026~~ → **5 August 2026** | Run submission deadline |
+| ~~15 July 2026~~ → **20 August 2026** | Track results declared |
+| ~~30 August 2026~~ → **4 September 2026** | Working notes due |
+| ~~30 September 2026~~ → **5 October 2026** | Camera-ready copies |
 | **December 2026** | FIRE 2026 Conference |
 
 ## Ethical Considerations
