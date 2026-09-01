@@ -462,6 +462,16 @@
     color: var(--color-cyan);
   }
 
+  /* Acknowledgment line (e.g. Microsoft CMT) — plain text, always visible */
+  .footer__ack {
+    max-width: 720px;
+    margin: 24px auto 0;
+    font-family: var(--font-body);
+    font-size: var(--type-xs);
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+
   /* ── Notice banner (for schedule updates / postponements) ─── */
   .notice {
     margin: 24px 0;
