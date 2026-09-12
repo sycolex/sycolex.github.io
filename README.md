@@ -49,8 +49,9 @@ Macro-F1, Micro-F1, Accuracy, ROUGE-L, BLEU, METEOR, equally weighted)
 
 17 teams were ranked in Task 1 and 8 in Task 2. Results are final; no
 further submissions or corrections are accepted. Working Notes are due
-**15 September 2026** via [Microsoft CMT](https://cmt3.research.microsoft.com/SYCOLEX2026/Submission/Index)
-— do not include your rank in the paper.
+**15 September 2026** via [Microsoft CMT](https://cmt3.research.microsoft.com/FIRE2026)
+— select the **SYCOLEX** track during submission, and do not include your
+rank in the paper.
 
 ## Timeline
 
