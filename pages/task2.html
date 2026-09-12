@@ -199,7 +199,7 @@
       <a href="task1.html" class="nav-link">Task 1: ESP</a>
       <a href="task2.html" class="nav-link" aria-current="page">Task 2: Sycophancy</a>
       <a href="faq.html" class="nav-link">FAQ</a>
-      <a href="registration.html" class="nav-link btn btn-outline" style="padding: 8px 20px; font-size: 0.7rem;">Register</a>
+      <a href="results.html" class="nav-link btn btn-outline" style="padding: 8px 20px; font-size: 0.7rem;">Results</a>
       <button class="theme-toggle" aria-label="Switch theme">Light</button>
     </div>
     <button class="nav__toggle" aria-label="Toggle menu">
@@ -212,7 +212,7 @@
     <a href="task1.html" class="nav-link">Task 1: ESP</a>
     <a href="task2.html" class="nav-link" aria-current="page">Task 2: Sycophancy</a>
     <a href="faq.html" class="nav-link">FAQ</a>
-    <a href="registration.html" class="nav-link">Register</a>
+    <a href="results.html" class="nav-link">Results</a>
     <button class="theme-toggle" aria-label="Switch theme">Light</button>
   </div>
 
@@ -760,16 +760,15 @@
         <div class="task-section__eyebrow">§ 08 · EVALUATION</div>
         <h2>Evaluation</h2>
 
-        <p class="prose mb-8">
-          <strong>Note:</strong> Metrics are <em>tentative</em> and may be updated before the test data release.
-        </p>
+        <div class="notice notice--results">
+          <span class="notice__label">Final:</span>
+          Evaluation is complete. The metrics below are the ones reported on the
+          final leaderboard.
+          <a href="results.html" class="notice__link">View the leaderboard →</a>
+        </div>
 
-        <p class="prose-sm text-muted mb-16" style="font-size: 0.75rem;">
-          * Final details — including metric specifications, prompt templates, and evaluation pipeline — will be confirmed after <strong><span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span></strong>. Minor updates to prompt variants may occur.
-        </p>
-
-        <p class="prose mt-16 mb-24">
-          This is a standard <strong>binary classification</strong> task. System performance is evaluated using four standard metrics computed over the entire test set:
+        <p class="prose mt-24 mb-24">
+          This is a standard <strong>binary classification</strong> task. System performance is reported using five metrics computed over the entire test set:
         </p>
 
         <div class="table-wrapper mt-24">
@@ -794,20 +793,26 @@
                 <td>Proportion of true sycophantic instances detected: TP / (TP + FN)</td>
               </tr>
               <tr>
-                <td><strong>F1 Score</strong></td>
-                <td>Harmonic mean of precision and recall: 2 × (P × R) / (P + R)</td>
+                <td><strong>F1 (Syc)</strong></td>
+                <td>Harmonic mean of precision and recall on the sycophantic class: 2 × (P × R) / (P + R)</td>
+              </tr>
+              <tr>
+                <td><strong>Macro-F1</strong></td>
+                <td>Mean F1 across both classes — the official ranking metric</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <p class="prose mt-24">
-          <strong>Overall ranking</strong> is determined by the <strong>F1 Score</strong>. All metrics are computed globally across all jurisdictions, models, and prompt variants.
+          <strong>Overall ranking</strong> is determined by <strong>Macro-F1</strong>. All metrics are computed globally across all jurisdictions, models, and prompt variants.
         </p>
 
         <div class="card mt-24">
           <p class="prose-sm">
-            Evaluation will be conducted on <strong>CodaBench</strong> (CodaLab v2). The scoring script will be released with the test data. The leaderboard will be updated automatically after each submission.
+            Evaluation was conducted on <strong>CodaBench</strong> (CodaLab v2). Final
+            standings for every ranked team are published on the
+            <a href="results.html" class="text-cyan">results page</a>.
           </p>
         </div>
       </section>
@@ -851,11 +856,11 @@
                 <td>Run submission deadline</td>
               </tr>
               <tr>
-                <td><strong><span class="date-changed"><span class="date-old">15 July 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 August 2026</span></span></strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">20 August 2026</span> <span class="date-arrow">→</span> <span class="date-new">31 August 2026</span></span></strong></td>
                 <td>Track results declared</td>
               </tr>
               <tr>
-                <td><strong><span class="date-changed"><span class="date-old">30 August 2026</span> <span class="date-arrow">→</span> <span class="date-new">4 September 2026</span></span></strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">4 September 2026</span> <span class="date-arrow">→</span> <span class="date-new">15 September 2026</span></span></strong></td>
                 <td>Working notes due</td>
               </tr>
               <tr>
@@ -867,7 +872,6 @@
                 <td>FIRE 2026 Conference — results announced</td>
               </tr>
             </tbody>
-          </table>
           </table>
         </div>
       </section>
@@ -919,7 +923,7 @@
     <div class="footer__links">
       <a href="https://fire-lab.github.io/" target="_blank" rel="noopener">FIRE 2026</a>
       <a href="faq.html">FAQ</a>
-      <a href="registration.html">Register</a>
+      <a href="results.html">Results</a>
     </div>
   </footer>
 

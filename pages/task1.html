@@ -57,7 +57,7 @@
       <a href="task1.html" class="nav-link" aria-current="page">Task 1: ESP</a>
       <a href="task2.html" class="nav-link">Task 2: Sycophancy</a>
       <a href="faq.html" class="nav-link">FAQ</a>
-      <a href="registration.html" class="nav-link btn btn-outline" style="padding: 8px 20px; font-size: 0.7rem;">Register</a>
+      <a href="results.html" class="nav-link btn btn-outline" style="padding: 8px 20px; font-size: 0.7rem;">Results</a>
       <button class="theme-toggle" aria-label="Switch theme">Light</button>
     </div>
     <button class="nav__toggle" aria-label="Toggle menu">
@@ -70,7 +70,7 @@
         <a href="task1.html" class="nav-link" aria-current="page">Task 1: ESP</a>
         <a href="task2.html" class="nav-link">Task 2: Sycophancy</a>
         <a href="faq.html" class="nav-link">FAQ</a>
-        <a href="registration.html" class="nav-link">Register</a>
+        <a href="results.html" class="nav-link">Results</a>
       <button class="theme-toggle" aria-label="Switch theme">Light</button>
   </div>
 
@@ -377,12 +377,17 @@
         <div class="task-section__eyebrow">§ 07 · EVALUATION</div>
         <h2>Evaluation</h2>
 
-        <p class="prose mb-8">
-          <strong>Note:</strong> Metrics and weights are <em>tentative</em> and may be updated before the test data release.
-        </p>
+        <div class="notice notice--results">
+          <span class="notice__label">Final:</span>
+          Evaluation is complete and the metric set below is the one actually used
+          for scoring. It supersedes the provisional weighting published before the
+          test data release.
+          <a href="results.html" class="notice__link">View the leaderboard →</a>
+        </div>
 
-        <p class="prose-sm text-muted mb-16" style="font-size: 0.75rem;">
-          * Final details — including metric weights, prompt templates, and evaluation pipeline — will be confirmed after <strong><span class="date-changed"><span class="date-old">15 June 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 June 2026</span></span></strong>. Minor updates to prompt specifications may occur.
+        <p class="prose mt-24">
+          Six metrics were computed, each carrying <strong>equal weight</strong>. The
+          <strong>Total</strong> score reported on the leaderboard is their arithmetic mean.
         </p>
 
         <div class="table-wrapper mt-24">
@@ -396,44 +401,48 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>Macro F1</strong></td>
-                <td><span class="weight-badge weight-badge--tentative">35%</span></td>
-                <td>Exact match on predicted section labels vs. gold standard</td>
+                <td><strong>Macro-F1</strong></td>
+                <td><span class="weight-badge">1/6</span></td>
+                <td>F1 over predicted IPC sections, averaged equally across sections</td>
+              </tr>
+              <tr>
+                <td><strong>Micro-F1</strong></td>
+                <td><span class="weight-badge">1/6</span></td>
+                <td>F1 aggregated over all section predictions, weighting frequent sections more</td>
+              </tr>
+              <tr>
+                <td><strong>Accuracy</strong></td>
+                <td><span class="weight-badge">1/6</span></td>
+                <td>Exact-match agreement on the predicted set of applicable sections</td>
               </tr>
               <tr>
                 <td><strong>ROUGE-L</strong></td>
-                <td><span class="weight-badge weight-badge--tentative">25%</span></td>
-                <td>Longest common subsequence similarity between participant's reasoning and gold reasoning</td>
+                <td><span class="weight-badge">1/6</span></td>
+                <td>Longest common subsequence similarity between participant reasoning and gold reasoning</td>
               </tr>
               <tr>
                 <td><strong>BLEU</strong></td>
-                <td><span class="weight-badge weight-badge--tentative">20%</span></td>
-                <td>Sentence-level BLEU score between reasoning texts</td>
+                <td><span class="weight-badge">1/6</span></td>
+                <td>N-gram precision of the generated explanation against the reference</td>
               </tr>
               <tr>
-                <td><strong>Recall@3</strong></td>
-                <td><span class="weight-badge weight-badge--tentative">10%</span></td>
-                <td>Whether gold section labels appear in the participant's top-3 predictions</td>
-              </tr>
-              <tr>
-                <td><strong>Legal Semantic Score (LSS)</strong></td>
-                <td><span class="weight-badge weight-badge--tentative">10%</span></td>
-                <td>Cosine similarity of reasoning embeddings from a legal-domain language model (model not disclosed)</td>
+                <td><strong>METEOR</strong></td>
+                <td><span class="weight-badge">1/6</span></td>
+                <td>Alignment-based score accounting for stems and synonyms in the explanation</td>
               </tr>
             </tbody>
           </table>
         </div>
 
         <p class="prose mt-24">
-          <strong>Composite Score</strong> = weighted sum of above metrics.
+          <strong>Total</strong> = (Macro-F1 + Micro-F1 + Accuracy + ROUGE-L + BLEU + METEOR) / 6.
         </p>
 
         <div class="card mt-24">
           <p class="prose-sm">
-            The <strong>Legal Semantic Score</strong> uses a pre-trained legal-domain embedding model. The specific model will <em>NOT</em> be disclosed to participants, preventing gaming of this metric.
-          </p>
-          <p class="prose-sm mt-16">
-            Evaluation will be conducted on <strong>CodaBench</strong> (CodaLab v2). The scoring script will be released with the test data. The leaderboard will be updated automatically after each submission.
+            Evaluation was conducted on <strong>CodaBench</strong> (CodaLab v2). Final
+            standings for every ranked team are published on the
+            <a href="results.html" class="text-cyan">results page</a>.
           </p>
         </div>
       </section>
@@ -477,11 +486,11 @@
                 <td>Run submission deadline</td>
               </tr>
               <tr>
-                <td><strong><span class="date-changed"><span class="date-old">15 July 2026</span> <span class="date-arrow">→</span> <span class="date-new">20 August 2026</span></span></strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">20 August 2026</span> <span class="date-arrow">→</span> <span class="date-new">31 August 2026</span></span></strong></td>
                 <td>Track results declared</td>
               </tr>
               <tr>
-                <td><strong><span class="date-changed"><span class="date-old">30 August 2026</span> <span class="date-arrow">→</span> <span class="date-new">4 September 2026</span></span></strong></td>
+                <td><strong><span class="date-changed"><span class="date-old">4 September 2026</span> <span class="date-arrow">→</span> <span class="date-new">15 September 2026</span></span></strong></td>
                 <td>Working notes due</td>
               </tr>
               <tr>
@@ -542,7 +551,7 @@
     <div class="footer__links">
       <a href="https://fire-lab.github.io/" target="_blank" rel="noopener">FIRE 2026</a>
       <a href="faq.html">FAQ</a>
-      <a href="registration.html">Register</a>
+      <a href="results.html">Results</a>
     </div>
   </footer>
 

@@ -499,6 +499,29 @@
     margin-right: 8px;
   }
 
+  /* Results variant — cyan accent, used for the leaderboard announcement */
+  .notice--results {
+    border-left-color: var(--color-cyan);
+  }
+
+  .notice--results .notice__label {
+    color: var(--color-cyan);
+  }
+
+  .notice__link {
+    display: inline-block;
+    margin-left: 6px;
+    font-family: var(--font-mono);
+    font-size: var(--type-sm);
+    color: var(--color-cyan);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast);
+  }
+
+  .notice__link:hover {
+    border-bottom-color: var(--color-cyan);
+  }
+
   /* ── Date-changed (strikethrough old + new + arrow) ────────── */
   .date-changed {
     display: inline-flex;
