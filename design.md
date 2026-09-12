@@ -20,18 +20,18 @@ before contributing CSS, layout changes, or new pages.
               └──────────────────┬─────────────────────┘
                                  │
               ┌──────────────────┴─────────────────────┐
-              │  CSS — 13 files, native @layer         │
+              │  CSS — 12 files, native @layer         │
               │  base · type · layout · components     │
-              │  landing · task · loader · cookie      │
-              │  logo · syntax · animations · theme    │
+              │  landing · task · results · loader     │
+              │  cookie · syntax · animations · theme  │
               └──────────────────┬─────────────────────┘
                                  │
               ┌──────────────────┴─────────────────────┐
-              │  JS — 17 files, IIFE modules, no bundler│
+              │  JS — 13 files, IIFE modules, no bundler│
               │  theme · loader · nav · scroll-reveal  │
               │  tilt · counter · timeline · scrollspy  │
-              │  syntax · typewriter · copy · logo      │
-              │  transitions · cookie-disclosure       │
+              │  syntax · typewriter · copy             │
+              │  cookie-disclosure · pretext-dynamic   │
               │  + vendor/pretext.js (text measurement)│
               └────────────────────────────────────────┘
 ```
@@ -42,8 +42,8 @@ to the `gh-pages` branch. The only "build" is the GitHub Pages publisher.
 
 **No framework.** No React, Vue, Svelte, Tailwind, PostCSS, or bundler.
 All layout is hand-written CSS; all interactivity is hand-written
-vanilla JS (ES2020+, IIFE modules, IntersectionObserver, View
-Transitions API where supported).
+vanilla JS (ES2020+, IIFE modules, IntersectionObserver). Navigation is
+plain full-page loads — there is no client-side router.
 
 **Layer order** declared in `css/base.css`:
 
@@ -341,6 +341,21 @@ the dot. Odd/even items flip which side the content sits on. A central
 enters the viewport. A today-marker is dynamically inserted by
 `js/timeline.js`.
 
+### Leaderboard (`css/results.css`, results page)
+
+`.leaderboard` extends the base `table` component for dense numeric data:
+mono digits with `font-variant-numeric: tabular-nums`, right-aligned
+`.num` / `.total` / `.rank` cells, and a left-aligned `.team` column.
+The `.total` cell paints a proportional bar behind the value via
+`--bar` (0–100, set inline per row and normalized to the table's own
+maximum). Rows ranked 1–3 carry `.is-top`.
+
+Supporting blocks in the same file: `.podium` (top-three cards),
+`.result-stats` (summary number strip), `.metric-legend` (metric
+glossary grid) and `.callout` / `.callout--amber` (boxed note with a
+stacked label — distinct from the shared `.notice` banner in
+`components.css`, which uses an inline label).
+
 ### JSON block
 
 ```html
@@ -433,8 +448,6 @@ All five go to `0ms` under `@media (prefers-reduced-motion: reduce)`.
 | `js/syntax.js` | Hand-written JSON tokenizer/highlighter (tokens: key, str, num, bool, null, brace, bracket). |
 | `js/typewriter.js` | Tokenizes HTML, animates text + tags one at a time. Triggered by IntersectionObserver. |
 | `js/copy.js` | Clipboard write for `.json-block__copy` with success state + aria-live announcement. |
-| `js/logo.js` | Reusable logo component (used by `pages/loader.html` only — that page is deprecated). |
-| `js/transitions.js` | View Transitions API for SPA-feel same-origin navigation. Falls back gracefully. |
 | `js/cookie-disclosure.js` | One-time banner listing functional cookies. 180-day ack cookie. |
 | `js/pretext-dynamic.js` | ESM module. Dynamically sizes hero title, section headers, pull-quotes, task descriptions, stat numbers, organizer names, badges, buttons using `pretext` text measurement. |
 | `js/vendor/pretext.js` | **Vendored copy of @chenglou/pretext v0.0.7** (MIT, by Cheng Lou). Pinned in `utils/pretext` git submodule. |
@@ -534,26 +547,30 @@ curl -L "https://cdn.jsdelivr.net/npm/@chenglou/pretext@<version>/dist/layout.js
 │   ├── CODEOWNERS                # auto-reviewer rules
 │   └── workflows/
 │       └── deploy.yml            # main → gh-pages deploy action
+├── .notes/
+│   └── theme-fouc-prevent.js     # canonical copy of the <head> FOUC snippet
 ├── assets/
 │   ├── logo.svg                  # dark-theme logo (cyan + pink)
 │   ├── logo-light.svg            # light-theme logo (deeper blue + deeper pink)
+│   ├── logo*.png                 # raster fallbacks (128 / 256, light + dark)
 │   ├── favicon.svg / .png
+│   ├── task1_description.md      # Codabench copy of the Task 1 brief
+│   ├── task1_terms.md            # Codabench copy of the Task 1 terms
 │   └── README.md
-├── css/
-│   ├── base.css                  # tokens, reset, base, @property
+├── css/                          # 12 files, loaded in this order
+│   ├── base.css                  # tokens, reset, base, @property, @layer order
 │   ├── type.css                  # type scale, prose, .eyebrow, h1–h6
 │   ├── layout.css                # .container, .section, .grid
 │   ├── components.css            # .nav, .btn, .card, .badge, table, .footer
 │   ├── landing.css               # hero, sections, timeline, organizers
 │   ├── task.css                  # task-page sidebar, JSON block, organizer cards
-│   ├── loader.css                # session-cookie loader overlay
-│   ├── logo.css                  # (legacy, kept for the deprecated loader page)
+│   ├── results.css               # leaderboard tables, podium, callouts, stats
+│   ├── loader.css                # session-cookie loader overlay (landing only)
 │   ├── syntax.css                # JSON token colors
 │   ├── animations.css            # @keyframes library
 │   ├── theme.css                 # theme overrides (light-default rules)
-│   ├── cookie-disclosure.css     # cookie banner styles
-│   └── styles.css                # (legacy, dev scratch — not used in production)
-├── js/
+│   └── cookie-disclosure.css     # cookie banner styles
+├── js/                           # 13 modules + vendor
 │   ├── theme.js                  # light/dark toggle
 │   ├── loader.js                 # cookie-gated loader (landing only)
 │   ├── nav.js                    # sticky nav, mobile menu, scroll progress
@@ -565,24 +582,34 @@ curl -L "https://cdn.jsdelivr.net/npm/@chenglou/pretext@<version>/dist/layout.js
 │   ├── syntax.js                 # JSON tokenizer/highlighter
 │   ├── typewriter.js             # JSON block typewriter
 │   ├── copy.js                   # clipboard copy
-│   ├── logo.js                   # (legacy — used by removed pages/loader.html)
-│   ├── transitions.js            # View Transitions API
 │   ├── cookie-disclosure.js      # functional-cookie banner
-│   ├── pretext-dynamic.js         # ESM; uses pretext for auto-sizing
+│   ├── pretext-dynamic.js        # ESM; uses pretext for auto-sizing
 │   └── vendor/
-│       └── pretext.js            # vendored @chenglou/pretext v0.0.7 (MIT)
+│       ├── pretext.js            # vendored @chenglou/pretext v0.0.7 (MIT)
+│       └── …                     # pretext's own deps (bidi, line-break, …)
 ├── pages/
 │   ├── README.md                 # how to add a new page
 │   ├── task1.html                # Task 1 spec (9 sections, sidebar layout)
 │   ├── task2.html                # Task 2 spec (10 sections + interactive demo)
+│   ├── results.html              # final leaderboards for both tasks (6 sections)
 │   ├── faq.html                  # FAQ accordion
 │   ├── organizers.html           # organizer bios + prior experience
 │   └── registration.html         # registration CTA
+├── final_task1_data/
+│   └── task1.jsonl               # 525 Task 1 training cases (released data)
+├── codabench_file/
+│   ├── task1_description.md      # brief as uploaded to Codabench
+│   └── task1_terms.md            # terms as uploaded to Codabench
 ├── docs/
 │   └── README.md                 # (placeholder)
 └── utils/
     └── pretext/                  # git submodule: chenglou/pretext (source of truth)
 ```
+
+> **Nothing else is served.** Every file in the repo root is either a
+> page, an asset, or metadata — there are no scratch or demo pages,
+> because the whole repo is published verbatim to `gh-pages`. If you
+> add a throwaway file, it goes live at `sycolex.com/<that-file>`.
 
 ---
 

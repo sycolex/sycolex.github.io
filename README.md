@@ -15,14 +15,42 @@ Given the factual description of an Indian Supreme Court case, participants must
 3. Explain the legal reasoning connecting each fact sentence to the applicable IPC section
 
 **Data:** 525 training cases (JSONL), 105 test cases  
-**Evaluation:** Macro F1 (35%), ROUGE-L (25%), BLEU (20%), Recall@3 (10%), Legal Semantic Score (10%)
+**Evaluation:** Macro-F1, Micro-F1, Accuracy, ROUGE-L, BLEU, METEOR — equally weighted; Total is their arithmetic mean
 
 ### Task 2: Sycophancy Detection
 
 Detect sycophantic behavior in LLMs — the tendency to echo user beliefs regardless of truth. Given a legal query with clear outcome expectations, participants predict whether the model will agree or disagree with the user.
 
 **Data:** Cross-jurisdictional dataset spanning U.S. and Indian Supreme Court cases  
-**Evaluation:** F1 Score
+**Evaluation:** Accuracy, Precision, Recall, F1 (sycophantic class), Macro-F1 — ranked by Macro-F1
+
+## Final Results
+
+The final evaluation results are published at
+[`pages/results.html`](pages/results.html) — the authoritative source for
+track rankings. Top three per task:
+
+**Task 1 — Explainable Statute Prediction** (Total = arithmetic mean of
+Macro-F1, Micro-F1, Accuracy, ROUGE-L, BLEU, METEOR, equally weighted)
+
+| Rank | Team | Best Run | Total |
+|---:|---|---|---:|
+| 1 | KLH | Run 2 | 0.48215 |
+| 2 | DwaipayanDatta | Run 2 | 0.4330 |
+| 3 | AnastasiiaPotiagalova | Run 1 | 0.3865 |
+
+**Task 2 — Sycophancy Detection** (ranked by Macro-F1)
+
+| Rank | Team | Best Run | Macro-F1 |
+|---:|---|---|---:|
+| 1 | AnastasiiaPotiagalova | Run 1 | 81.29% |
+| 2 | RadhikaBohra | Run 2 | 76.81% |
+| 3 | SupriyaChanda | Run 2 | 65.04% |
+
+17 teams were ranked in Task 1 and 8 in Task 2. Results are final; no
+further submissions or corrections are accepted. Working Notes are due
+**15 September 2026** via [Microsoft CMT](https://cmt3.research.microsoft.com/SYCOLEX2026/Submission/Index)
+— do not include your rank in the paper.
 
 ## Timeline
 
@@ -32,8 +60,8 @@ Detect sycophantic behavior in LLMs — the tendency to echo user beliefs regard
 | ~~15 June 2026~~ → **20 June 2026** | Training data release (525 cases) |
 | ~~20 July 2026~~ → **25 July 2026** | Test data release (100 cases) |
 | ~~30 June 2026~~ → **5 August 2026** | Run submission deadline |
-| ~~15 July 2026~~ → **20 August 2026** | Track results declared |
-| ~~30 August 2026~~ → **4 September 2026** | Working notes due |
+| ~~20 August 2026~~ → **31 August 2026** | Track results declared |
+| ~~4 September 2026~~ → **15 September 2026** | Working notes due |
 | ~~30 September 2026~~ → **5 October 2026** | Camera-ready copies |
 | December 2026 | FIRE 2026 Conference |
 
@@ -49,17 +77,23 @@ Detect sycophantic behavior in LLMs — the tendency to echo user beliefs regard
 
 ```
 ├── index.html              # Landing page with loader, hero, tasks, timeline
+├── 404.html                # Custom 404
 ├── pages/
 │   ├── task1.html          # Task 1: ESP full specification
-│   ├── task2.html          # Task 2: Sycophancy (coming soon)
+│   ├── task2.html          # Task 2: Sycophancy full specification
+│   ├── results.html        # Final leaderboards for both tasks
 │   ├── faq.html            # Frequently asked questions
 │   ├── organizers.html     # Organizer details and prior experience
 │   └── registration.html   # Registration information
-├── css/                    # Modular CSS (base, type, components, layout, etc.)
+├── css/                    # Modular CSS (base, type, components, results, etc.)
 ├── js/                     # Modular JS (nav, scroll-reveal, timeline, theme, etc.)
-├── assets/                 # Logo SVGs
+├── assets/                 # Logos, favicons, Codabench task copy
+├── final_task1_data/       # Released Task 1 training set (525 cases, JSONL)
+├── codabench_file/         # Task briefs as uploaded to Codabench
 └── utils/pretext/          # Pretext library (git submodule)
 ```
+
+See `design.md` for the full design system and file map.
 
 ## Features
 

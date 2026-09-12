@@ -1,0 +1,271 @@
+/* results.css — Final leaderboard tables, podium, and result callouts */
+
+@layer components {
+
+  /* ── Wide shell ───────────────────────────────────────
+     The leaderboards carry up to 10 numeric columns, which do not fit
+     the 760px prose measure used by the task pages. The results page
+     therefore runs a wider content column, while prose blocks inside it
+     stay clamped to a readable measure. Narrow viewports fall back to
+     the shared responsive rules plus .table-wrapper horizontal scroll. */
+  .sidebar-layout--wide {
+    max-width: 1400px;
+  }
+
+  .main-content--wide {
+    max-width: 980px;
+  }
+
+  .main-content--wide .prose,
+  .main-content--wide .prose-lg,
+  .main-content--wide .prose-sm,
+  .main-content--wide .callout__text {
+    max-width: 70ch;
+  }
+
+  /* ── Callout ───────────────────────────────────── */
+  .callout {
+    border: 1px solid var(--color-border);
+    border-left: 2px solid var(--color-cyan);
+    background: var(--color-surface-1);
+    border-radius: 2px;
+    padding: 20px 24px;
+  }
+
+  .callout__label {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-cyan);
+    margin-bottom: 8px;
+  }
+
+  .callout__text {
+    font-family: var(--font-body);
+    font-size: var(--type-base);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .callout--amber { border-left-color: var(--color-amber); }
+  .callout--amber .callout__label { color: var(--color-amber); }
+
+  /* ── Podium (top three) ───────────────────────────────── */
+  .podium {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .podium__slot {
+    position: relative;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-1);
+    border-radius: 2px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: border-color var(--dur-fast), transform var(--dur-fast);
+  }
+
+  .podium__slot:hover {
+    border-color: var(--color-border-lit);
+    transform: translateY(-2px);
+  }
+
+  .podium__rank {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ghost);
+    margin-bottom: 10px;
+  }
+
+  .podium__team {
+    font-family: var(--font-display);
+    font-weight: 700;
+    /* --type-base, not --type-md: the longest team name on the board
+       ("AnastasiiaPotiagalova") is a single unbreakable token that
+       overflows a podium card at 1.25rem and breaks mid-word. */
+    font-size: var(--type-base);
+    color: var(--color-heading);
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+
+  .podium__score {
+    font-family: var(--font-mono);
+    font-size: var(--type-lg);
+    color: var(--color-cyan);
+    margin-top: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .podium__metric {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-top: 4px;
+  }
+
+  /* Rank accents — gold / silver / bronze rendered in palette tokens */
+  .podium__slot--1 { border-top: 2px solid var(--color-amber); }
+  .podium__slot--1 .podium__rank { color: var(--color-amber); }
+  .podium__slot--2 { border-top: 2px solid var(--color-ghost); }
+  .podium__slot--3 { border-top: 2px solid var(--color-violet); }
+  .podium__slot--3 .podium__rank { color: var(--color-violet); }
+
+  /* ── Leaderboard table ────────────────────────────────── */
+  .leaderboard {
+    font-size: var(--type-sm);
+  }
+
+  .leaderboard thead th {
+    padding: 14px 12px;
+    white-space: nowrap;
+  }
+
+  .leaderboard tbody td {
+    padding: 12px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  /* Numeric columns: mono, right-aligned, tabular so digits line up */
+  .leaderboard .num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: var(--color-muted);
+  }
+
+  .leaderboard th.num { text-align: right; }
+
+  .leaderboard .rank {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: var(--color-ghost);
+    width: 1%;
+  }
+
+  .leaderboard .team {
+    font-family: var(--font-body);
+    font-size: var(--type-base);
+    color: var(--color-text-strong);
+    font-weight: 600;
+    white-space: normal;
+    min-width: 13ch;
+  }
+
+  .leaderboard .run {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    color: var(--color-muted);
+  }
+
+  /* Total / headline column — the number the ranking is built on */
+  .leaderboard .total {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    color: var(--color-text-strong);
+    font-weight: 700;
+    position: relative;
+  }
+
+  /* Subtle proportional bar behind the total, driven by --bar (0–100) */
+  .leaderboard .total::before {
+    content: '';
+    position: absolute;
+    inset-block: 6px;
+    right: 6px;
+    width: calc(var(--bar, 0) * 1%);
+    max-width: calc(100% - 12px);
+    background: var(--color-cyan);
+    opacity: 0.12;
+    border-radius: 1px;
+    pointer-events: none;
+  }
+
+  /* Top-three row emphasis */
+  .leaderboard tr.is-top .rank { color: var(--color-amber); font-weight: 700; }
+  .leaderboard tr.is-top .team { color: var(--color-heading); }
+
+  /* ── Metric legend ────────────────────────────────────── */
+  .metric-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 12px;
+  }
+
+  .metric-legend__item {
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    background: var(--color-surface-1);
+    padding: 14px 16px;
+  }
+
+  .metric-legend__name {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-cyan);
+    margin-bottom: 6px;
+  }
+
+  .metric-legend__desc {
+    font-family: var(--font-body);
+    font-size: var(--type-sm);
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Summary stats strip ──────────────────────────────── */
+  .result-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+  }
+
+  .result-stat {
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    background: var(--color-surface-1);
+    padding: 20px;
+    text-align: center;
+  }
+
+  .result-stat__num {
+    font-family: var(--font-mono);
+    font-size: var(--type-xl);
+    color: var(--color-cyan);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+
+  .result-stat__label {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin-top: 10px;
+  }
+
+  /* ── Responsive ───────────────────────────────────────── */
+  @media (max-width: 860px) {
+    .podium { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 640px) {
+    .leaderboard { font-size: var(--type-xs); }
+    .leaderboard thead th { padding: 12px 8px; }
+    .leaderboard tbody td { padding: 10px 8px; }
+    .leaderboard .team { font-size: var(--type-sm); }
+  }
+}
